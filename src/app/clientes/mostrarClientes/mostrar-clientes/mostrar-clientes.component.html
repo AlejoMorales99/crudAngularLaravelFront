@@ -1,0 +1,202 @@
+<div class="container ">
+
+  <div class="row mt-3 ">
+
+    <div class="col-md-4 ">
+
+      <div class="border p-3 text-center bg-light " >
+        REGISTRAR USUARIOS
+      </div>
+
+      <form id="miFormulario" autocomplete="off" [formGroup]="frmClientes" (ngSubmit)="submit()" class="border-end border-bottom text-left border-start border-1 p-3  " >
+
+        <!-- MENSAJES DE VALIDACION DE LA CEDULA -->
+
+
+
+        <div  class="mb-3">
+          <label for="clienteCedula" class="form-label">INGRESE SU CEDULA</label>
+
+          <div *ngIf="frmClientes.get('cedula')?.errors && frmClientes.get('cedula')?.touched" >
+            <span class="text-danger " *ngIf="frmClientes.get('cedula')?.errors?.['maxlength'] "> <b>Debe de tener al menox 10 caracteres</b> </span>
+            <span class="text-danger" *ngIf="frmClientes.get('cedula')?.errors?.['required']"> <b>La cedula no puede quedar vacío</b> </span>
+            <span class="text-danger" *ngIf="frmClientes.get('cedula')?.errors?.['minlength']"> <b>Debe de tener al menos 3 caracteres</b> </span>
+            <span class="text-danger" *ngIf="frmClientes.get('cedula')?.errors?.['pattern']"> <b>Debe de tener solo numeros</b> </span>
+          </div>
+
+          <input formControlName="cedula" type="text" class="form-control"  id="clienteCedula" >
+        </div>
+
+        <!-- ----------------------------------- -->
+
+
+        <!-- MENSAJES DE VALIDACION DEL NOMBRE -->
+        <div class="mb-3">
+
+
+
+          <label for="nombreCliente" class="form-label">INGRESE SU NOMBRE</label>
+
+          <div *ngIf="frmClientes.get('nombre')?.errors && frmClientes.get('nombre')?.touched" >
+            <span class="text-danger" *ngIf="frmClientes.get('nombre')?.errors?.['required']"> <b>El nombre no puede estar vacio</b> </span>
+          </div>
+
+          <input formControlName="nombre" type="text" class="form-control" id="nombreCliente" >
+        </div>
+
+
+         <!-- ----------------------------------- -->
+
+
+        <!-- MENSAJES DE VALIDACION DEL APELLIDO-->
+        <div class="mb-3">
+          <label for="apellidoCliente" class="form-label">INGRESE SU APELLIDO</label>
+
+          <div *ngIf="frmClientes.get('apellido')?.errors && frmClientes.get('apellido')?.touched" >
+            <span class="text-danger" *ngIf="frmClientes.get('apellido')?.errors?.['required']"> <b>El apellido no puede estar vacio</b> </span>
+          </div>
+
+          <input  formControlName="apellido" type="text" class="form-control" id="apellidoCliente">
+        </div>
+
+
+        <!-- ----------------------------------- -->
+
+
+        <!-- MENSAJES DE VALIDACION DEL CELULAR-->
+        <div class="mb-3">
+          <label for="clienteCelular" class="form-label">INGRESE SU NUMERO DE CELULAR</label>
+
+          <div *ngIf="frmClientes.get('celular')?.errors && frmClientes.get('celular')?.touched" >
+            <span class="text-danger" *ngIf="frmClientes.get('celular')?.errors?.['required']"> <b>El celular no puede estar vacio</b> </span>
+            <span class="text-danger" *ngIf="frmClientes.get('celular')?.errors?.['minlength']"> <b>Debe de tener minimo  10 caracteres</b>  <br></span>
+            <span class="text-danger " *ngIf="frmClientes.get('celular')?.errors?.['maxlength'] "> <b>Como maximo 10 caracteres</b> </span>
+            <span class="text-danger " *ngIf="frmClientes.get('celular')?.errors?.['pattern'] "> <b>Solo numeros</b> </span>
+          </div>
+
+          <input formControlName="celular" type="text" class="form-control" id="clienteCelular">
+        </div>
+
+
+        <!-- ----------------------------------- -->
+
+
+        <!-- MENSAJES DE VALIDACION DEL CORREO-->
+        <div class="mb-3">
+          <label for="clienteCorreo" class="form-label">INGRESE SU CORREO</label>
+
+          <div *ngIf="frmClientes.get('correo')?.errors && frmClientes.get('correo')?.touched" >
+            <span class="text-danger" *ngIf="frmClientes.get('correo')?.errors?.['required']"> <b>El correo no puede estar vacio</b> </span>
+            <span  class="text-danger" *ngIf="frmClientes.get('correo')?.errors?.['pattern']"> <b>El correo no es valido</b> </span>
+          </div>
+
+          <input  formControlName="correo" type="text" class="form-control" id="clienteCorreo">
+        </div>
+
+
+
+        <!-- ----------------------------------- -->
+
+
+        <!-- MENSAJES DE VALIDACION DE LA CONTRASEÑA-->
+        <div class="mb-3">
+          <label for="clientePassword" class="form-label">INGRESE SU CONTRASEÑA</label>
+
+          <div *ngIf="frmClientes.get('password')?.errors && frmClientes.get('password')?.touched" >
+            <span class="text-danger" *ngIf="frmClientes.get('password')?.errors?.['required']"> <b>La contraseña no puede estar vacio</b> </span>
+          </div>
+
+          <input   formControlName="password"  type="password" class="form-control" id="clientePassword">
+        </div>
+
+
+         <!-- ----------------------------------- -->
+
+        <div class="mb-3">
+          <label for="clienteMunicipio" class="form-label">SELECCIONE SU DEPARTAMENTO</label>
+
+          <div *ngIf="frmClientes.get('departamento')?.errors && frmClientes.get('departamento')?.touched" >
+            <span class="text-danger" *ngIf="frmClientes.get('departamento')?.errors?.['required']"> <b>El departamento no puede estar vacio </b> </span>
+          </div>
+
+          <select formControlName="departamento"  class="form-select" (change)="ciudadesMunicipio($event.target)"  >
+            <option *ngFor="let departamento of departamentos" >{{ departamento.departamento }}</option>
+          </select>
+        </div>
+
+        <!-- MENSAJES DE VALIDACION DEL MUNICIPIO-->
+        <div class="mb-3">
+          <label for="clienteCiudad" class="form-label">SELECCIONE SU MUNICIPIO</label>
+
+          <div *ngIf="frmClientes.get('municipio')?.errors && frmClientes.get('municipio')?.touched" >
+            <span class="text-danger" *ngIf="frmClientes.get('municipio')?.errors?.['required']"> <b>El municipio no puede estar vacio</b> </span>
+          </div>
+
+          <select formControlName="municipio"  class="form-select" >
+            <option *ngFor="let municipio of municipios"  value=" {{municipio.municipio}} " >{{ municipio.municipio }}</option>
+          </select>
+        </div>
+
+
+
+        <!-- ----------------------------------- -->
+
+
+        <div class=" text-center" >
+          <button type="submit"   class="btn btn-primary  ">REGISTRAR</button>
+        </div>
+
+
+      </form>
+
+    </div>
+
+    <div class="col-md-8 text-center  ">
+
+      <div class="table-responsive table-striped  ">
+        <h1>CLIENTES</h1>
+        <table class="table  ">
+
+          <thead>
+
+            <tr>
+              <th scope="col">CEDULA</th>
+              <th scope="col">NOMBRE</th>
+              <th scope="col">APELLIDO</th>
+              <th scope="col">CELULAR</th>
+              <th scope="col">CORREO</th>
+              <th scope="col">CONTRASEÑA</th>
+              <th scope="col">DEPARTAMENTO</th>
+              <th scope="col">MUNICIPIO</th>
+              <th scope="col">EDITAR</th>
+              <th scope="col">ELIMINAR</th>
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            <tr *ngFor="let cliente of clientes" >
+              <td> {{ cliente.cedula }} </td>
+              <td> {{ cliente.nombre }} </td>
+              <td> {{ cliente.apellido }} </td>
+              <td> {{ cliente.celular }} </td>
+              <td> {{ cliente.correo }} </td>
+              <td> {{ cliente.password }} </td>
+              <td> {{ cliente.departamento }} </td>
+              <td> {{ cliente.municipio }} </td>
+              <td><button [routerLink]= "['actualizarCliente', cliente.id]" class="btn btn-primary"  href="">EDITAR</button></td>
+              <td><button (click)="deleteCliente(cliente.id, cliente.nombre, cliente.apellido)" class="btn btn-danger"  href="">ELIMINAR</button></td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
